@@ -1,12 +1,16 @@
 ---
 import { nav } from '../data/site';
+import type { Locale } from '../lib/labels';
+interface Props { locale?: Locale; }
+const { locale = 'nl' } = Astro.props;
+const english = locale === 'en';
 const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
 const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 ---
 <header class="site-header">
-	<div class="utility wrap"><span>Hydraulische systemen voor professionals</span><span lang="nl">NL</span></div>
+	<div class="utility wrap"><span>{english ? 'Hydraulic systems for professionals' : 'Hydraulische systemen voor professionals'}</span><a href={url(english ? '/' : '/en/')} hreflang={english ? 'nl' : 'en'}>{english ? 'NL' : 'EN'}</a></div>
 	<div class="navigation wrap">
-		<a class="brand" href={url('/')} aria-label="Kantelbeer, naar home"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><strong>KANTELBEER</strong></a>
+		<a class="brand" href={url(english ? '/en/' : '/')} aria-label={english ? 'Kantelbeer, go home' : 'Kantelbeer, naar home'}><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><strong>KANTELBEER</strong></a>
 		<nav aria-label="Hoofdnavigatie">
 			<ul>
 				{nav.map((item) => <li class="nav-item">
@@ -26,6 +30,6 @@ const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, 
 				</ul>
 			</nav>
 		</details>
-		<a class="dealer-link" href={url('/dealerzoeker')}>Vind een dealer <span aria-hidden="true">↗</span></a>
+		<a class="dealer-link" href={url(english ? '/en/dealers' : '/dealerzoeker')}>{english ? 'Find a dealer' : 'Vind een dealer'} <span aria-hidden="true">↗</span></a>
 	</div>
 </header>

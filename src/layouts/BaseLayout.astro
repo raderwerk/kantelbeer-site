@@ -2,11 +2,14 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
+import type { Locale } from '../lib/labels';
+import { COPY } from '../lib/copy';
+interface Props { title: string; description: string; locale?: Locale; }
+const { title, description, locale = 'nl' } = Astro.props;
+const copy = COPY[locale];
 ---
 <!doctype html>
-<html lang="nl">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,9 +18,9 @@ const { title, description } = Astro.props;
 		<title>{title} · Kantelbeer</title>
 	</head>
 	<body>
-		<a class="skip-link" href="#inhoud">Ga naar inhoud</a>
-		<Header />
+		<a class="skip-link" href="#inhoud">{copy.skip}</a>
+		<Header locale={locale} />
 		<main id="inhoud"><slot /></main>
-		<Footer />
+		<Footer locale={locale} />
 	</body>
 </html>

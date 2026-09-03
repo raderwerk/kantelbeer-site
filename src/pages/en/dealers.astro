@@ -1,0 +1,10 @@
+---
+import DealerCatalog from '../../components/DealerCatalog.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COPY } from '../../lib/copy';
+const copy = COPY.en;
+---
+<BaseLayout locale="en" title={copy.catalogTitle} description={copy.catalogDescription}>
+	<section class="page-hero product-hero"><div class="wrap"><p class="eyebrow">40 locations</p><h1>{copy.catalogTitle}</h1><p>{copy.catalogDescription}</p></div></section>
+	<section class="section wrap" aria-labelledby="catalogue-title"><h2 id="catalogue-title">Search by region, type or postcode</h2><DealerCatalog locale="en" /></section>
+</BaseLayout>

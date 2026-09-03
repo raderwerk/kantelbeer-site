@@ -31,7 +31,7 @@ De site draait dan op `http://localhost:4321`.
 | `npm run build` | Productiebuild naar `./dist/` |
 | `npm run preview` | Preview van de build |
 | `npm run typecheck` | `astro check`, het type- en templatecontrole-commando dat ook in CI draait |
-| `npm test` | Unit tests (Vitest): dealerdata, filters, postcodezoekopdracht, lege staat, route-afleiding en linkcontrole |
+| `npm test` | Draait de unit-tests voor route-afleiding en de linkcontrole (inclusief foutpaden) |
 | `npm run check:links` | Controleert alle interne routes en in-page-ankers in de productiebuild en faalt bij een dode link |
 | `npm run ci` | Draait typecheck, tests, productiebuild en linkcontrole achter elkaar |
 
@@ -41,14 +41,14 @@ De merksite omvat home, drie productcategorieën, over ons, dealer worden, conta
 
 ## Dealercatalogus
 
-De dealercatalogus staat op `/dealerzoeker/`. Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
+De dealercatalogus is beschikbaar op `/dealerzoeker` en `/dealers` (Nederlands) en `/en/dealers` (Engels). Filters worden zonder paginaherlading toegepast en blijven deelbaar via de URL:
 
-| Parameter | Betekenis |
-|---|---|
-| `provincie` | slug, bijvoorbeeld `zeeland` of `nordrhein-westfalen` |
-| `type` | `verkoop`, `service` of `beide` (`verkoop`/`service` sluiten ook dealers van type `beide` in) |
-| `postcode` | zoekopdracht; toont de vijf dichtstbijzijnde dealers met afstand |
-| `land` | `nl`, `be` of `de`. Verplicht voor een kale viercijferige postcode (NL/BE-botsing); Nederlandse postcodes met letters (`1234 AB`) en Duitse vijfcijferige codes worden herkend zonder dit veld |
+| Parameter | Waarde |
+| --- | --- |
+| `provincie` | provincieslug uit `src/data/dealers.json` |
+| `type` | `verkoop`, `service` of `beide` |
+| `postcode` | Nederlandse, Belgische of Duitse postcode |
+| `land` | optioneel `nl`, `be` of `de` om een viercijferige postcode te disambigueren |
 
 De veertig fictieve dealers staan in één databestand: `src/data/dealers.json`. Postcodezoeken gebruikt lokale prefix-coördinaten (geen kaartdienst, geen `geolocation`). Een leeg filterresultaat toont een boodschap met alternatieve links, geen lege lijst.
 

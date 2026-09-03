@@ -53,8 +53,10 @@ export interface Copy {
 	altSearchAsBe: string;
 	altReset: string;
 	noJs: string;
-	disclaimer: string;
 }
+
+/** Required verbatim on every public page, including English pages. */
+export const DISCLAIMER = 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.';
 
 export const COPY: Record<Locale, Copy> = {
 	nl: {
@@ -117,7 +119,67 @@ export const COPY: Record<Locale, Copy> = {
 		altSearchAsBe: 'Zoek {postcode} als Belgische postcode',
 		altReset: 'Toon alle dealers',
 		noJs: 'JavaScript is nodig om filters zonder herladen toe te passen. De dealercatalogus zelf blijft zichtbaar.',
-		disclaimer: 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.',
+	},
+	en: {
+		skip: 'Skip to content',
+		home: 'Home',
+		dealersNav: 'Dealers',
+		mainNav: 'Main navigation',
+		language: 'Language',
+		languageName: 'English',
+		otherLanguage: 'Nederlands',
+		otherLanguageHref: '',
+		homeTitle: 'Kantelbeer — hydraulic lift and tilt systems',
+		homeDescription:
+			'Kantelbeer builds hydraulic lift and tilt systems for workshops and sells exclusively through a dealer network in the Benelux and Germany.',
+		homeLead:
+			'This site is being built around the product catalogue, the dealer catalogue and the quote request form.',
+		homeCta: 'Find the nearest dealer',
+		catalogTitle: 'Dealer catalogue',
+		catalogDescription:
+			'Find a Kantelbeer dealer by province, type or postcode. The dealer is the sales channel.',
+		catalogLead:
+			'Filter without reloading the page. A postcode search shows the five nearest dealers with distance, without asking for browser location permission.',
+		filtersLegend: 'Filters',
+		provinceLabel: 'Province',
+		allProvinces: 'All provinces',
+		typeLabel: 'Type',
+		allTypes: 'All types',
+		postcodeLabel: 'Postcode',
+		postcodeHint:
+			'Netherlands: 1234 AB. Belgium: four digits plus country Belgium. Germany: 50667. Four digits without letters need a country. Your browser is never asked for a location.',
+		countryLabel: 'Postcode country',
+		countryAuto: 'Not set',
+		searchSubmit: 'Show nearest dealers',
+		reset: 'Clear filters',
+		resultsHeading: 'Dealers',
+		countList: '{count} dealers',
+		countListOne: '{count} dealer',
+		countNearest: '{count} nearest dealers to {postcode}',
+		countNearestOne: 'Nearest dealer to {postcode}',
+		emptyStatus: 'No dealers found',
+		invalidPostcodeStatus: 'Postcode not recognised',
+		ambiguousStatus: 'Choose the postcode country',
+		distance: '{distance} from the postcode',
+		contactEmail: 'Email',
+		contactPhone: 'Phone',
+		contactForm: 'Contact form',
+		emptyFiltered:
+			'No dealers match this combination of province and type. Use one of the alternatives below instead of an empty list.',
+		emptyNearby:
+			'No dealers near this postcode with the current filters. Choose an alternative below.',
+		invalidPostcode:
+			'This postcode is not recognised. Use a Dutch (1234 AB), Belgian (1000, with country set to Belgium) or German (50667) postcode.',
+		ambiguousPostcode:
+			'This four-digit postcode could be Dutch or Belgian. Choose a country instead of silently guessing the wrong one.',
+		altAllInProvince: 'Show all dealers in {province}',
+		altTypeNationwide: 'Show {type} in all provinces',
+		altNearestAll: 'Show the five nearest dealers, ignoring province',
+		altClearPostcode: 'Clear the postcode and keep the other filters',
+		altSearchAsNl: 'Search {postcode} as a Dutch postcode',
+		altSearchAsBe: 'Search {postcode} as a Belgian postcode',
+		altReset: 'Show all dealers',
+		noJs: 'JavaScript is required to apply filters without a reload. The dealer catalogue itself remains visible.',
 	},
 };
 

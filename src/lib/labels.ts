@@ -1,6 +1,6 @@
 import type { Country, DealerType } from './types';
 
-export type Locale = 'nl';
+export type Locale = 'nl' | 'en';
 
 export const PROVINCE_LABELS: Record<string, { nl: string; en: string; country: Country }> = {
 	'noord-holland': { nl: 'Noord-Holland', en: 'North Holland', country: 'nl' },
