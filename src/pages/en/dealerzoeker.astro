@@ -1,0 +1,11 @@
+---
+import DealerCatalog from '../../components/DealerCatalog.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout locale="en" title="Dealer finder" description="Find a Kantelbeer dealer in your region.">
+	<section class="page-hero product-hero"><div class="wrap"><p class="eyebrow">40 locations</p><h1>A specialist nearby.</h1><p>Find a fictional Kantelbeer dealer for advice, installation and maintenance in your region.</p></div></section>
+	<section class="section wrap" aria-labelledby="catalogue-title">
+		<h2 id="catalogue-title">Search by region, type or postcode</h2>
+		<DealerCatalog locale="en" />
+	</section>
+</BaseLayout>

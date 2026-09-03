@@ -1,17 +1,21 @@
 ---
-const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 import type { Locale } from '../lib/labels';
 import { DISCLAIMER } from '../lib/copy';
-interface Props { locale?: Locale; }
+
+interface Props {
+	locale?: Locale;
+}
+
 const { locale = 'nl' } = Astro.props;
 const english = locale === 'en';
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 ---
 <footer>
 	<div class="footer-main wrap">
 		<div><a class="footer-brand" href={url(english ? '/en/' : '/')}>KANTELBEER</a><p>{english ? 'Thoughtfully in motion.' : 'Doordacht in beweging.'}<br/>{english ? 'Built for real work.' : 'Gebouwd voor het echte werk.'}</p></div>
-		<div><h2>Systemen</h2><a href={url('/producten/hefbruggen')}>Hefbruggen</a><a href={url('/producten/kantelaars')}>Kantelaars</a><a href={url('/producten/werkplaatsliften')}>Werkplaatsliften</a></div>
+		<div><h2>{english ? 'Systems' : 'Systemen'}</h2><a href={url('/producten/hefbruggen')}>Hefbruggen</a><a href={url('/producten/kantelaars')}>Kantelaars</a><a href={url('/producten/werkplaatsliften')}>Werkplaatsliften</a></div>
 		<div><h2>Kantelbeer</h2><a href={url('/over-ons')}>Over ons</a><a href={url('/dealer-worden')}>Dealer worden</a><a href={url('/contact')}>Contact</a></div>
-		<div><h2>Direct naar</h2><a href={url('/dealerzoeker')}>Dealerzoeker</a><a href={url('/contact#offerte')}>Offerte aanvragen</a></div>
+		<div><h2>{english ? 'Direct links' : 'Direct naar'}</h2><a href={url(english ? '/en/dealerzoeker' : '/dealerzoeker')}>{english ? 'Dealer finder' : 'Dealerzoeker'}</a><a href={url('/contact#offerte')}>{english ? 'Request a quote' : 'Offerte aanvragen'}</a></div>
 	</div>
 	<div class="disclaimer wrap"><p lang="nl">{DISCLAIMER}</p><p>© 2026 Kantelbeer · Privacy · {english ? 'Terms' : 'Voorwaarden'}</p></div>
 </footer>
