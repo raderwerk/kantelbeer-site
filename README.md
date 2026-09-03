@@ -31,6 +31,20 @@ De site draait dan op `http://localhost:4321`.
 | `npm run build` | Productiebuild naar `./dist/` |
 | `npm run preview` | Preview van de build |
 | `npm run typecheck` | `astro check`, het type- en templatecontrole-commando dat ook in CI draait |
+| `npm test` | Unit tests (Vitest): dealerdata, filters, postcodezoekopdracht en lege staat |
+
+## Dealercatalogus
+
+De dealercatalogus staat op `/dealers/` (EN: `/en/dealers/`). Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
+
+| Parameter | Betekenis |
+|---|---|
+| `provincie` | slug, bijvoorbeeld `zeeland` of `nordrhein-westfalen` |
+| `type` | `verkoop`, `service` of `beide` (`verkoop`/`service` sluiten ook dealers van type `beide` in) |
+| `postcode` | zoekopdracht; toont de vijf dichtstbijzijnde dealers met afstand |
+| `land` | optioneel `nl`, `be` of `de` om een viercijferige postcode te disambigueren |
+
+De veertig fictieve dealers staan in één databestand: `src/data/dealers.json`. Postcodezoeken gebruikt lokale prefix-coördinaten (geen kaartdienst, geen `geolocation`). Een leeg filterresultaat toont een boodschap met alternatieve links, geen lege lijst.
 
 ## Bijdragen
 

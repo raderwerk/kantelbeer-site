@@ -1,61 +1,14 @@
 ---
-const title = 'Kantelbeer — hydraulische hef- en kantelsystemen';
-const description =
-	'Kantelbeer bouwt hydraulische hef- en kantelsystemen voor werkplaatsen en verkoopt uitsluitend via een dealernetwerk in de Benelux en Duitsland.';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COPY } from '../lib/copy';
+
+const copy = COPY.nl;
+const dealersHref = `${import.meta.env.BASE_URL}dealers`;
 ---
 
-<html lang="nl">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<header>
-			<p class="wordmark">Kantelbeer</p>
-		</header>
-		<main>
-			<h1>{title}</h1>
-			<p>{description}</p>
-			<p>
-				Deze site wordt opgebouwd langs de productcatalogus, de dealercatalogus en het
-				offerteaanvraagformulier. Zie de open issues in <code>raderwerk/kantelbeer-site</code>
-				voor de voortgang.
-			</p>
-		</main>
-		<footer>
-			<p>Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.</p>
-		</footer>
-	</body>
-</html>
-
-<style>
-	:root {
-		color-scheme: light;
-	}
-
-	body {
-		font-family: system-ui, sans-serif;
-		line-height: 1.5;
-		margin: 0 auto;
-		max-width: 40rem;
-		padding: 2rem 1.5rem 4rem;
-		color: #1a1a1a;
-	}
-
-	.wordmark {
-		font-weight: 700;
-		letter-spacing: 0.02em;
-	}
-
-	footer {
-		margin-top: 3rem;
-		padding-top: 1rem;
-		border-top: 1px solid #d0d6e0;
-		font-size: 0.875rem;
-		color: #555;
-	}
-</style>
+<BaseLayout locale="nl" title={copy.homeTitle} description={copy.homeDescription}>
+	<h1>{copy.homeTitle}</h1>
+	<p>{copy.homeDescription}</p>
+	<p class="lead">{copy.homeLead}</p>
+	<p><a href={dealersHref}>{copy.homeCta}</a></p>
+</BaseLayout>

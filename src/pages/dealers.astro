@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DealerCatalog from '../components/DealerCatalog.astro';
+import { COPY } from '../lib/copy';
+
+const copy = COPY.nl;
+---
+
+<BaseLayout locale="nl" title={`${copy.catalogTitle} — Kantelbeer`} description={copy.catalogDescription}>
+	<h1>{copy.catalogTitle}</h1>
+	<p>{copy.catalogDescription}</p>
+	<DealerCatalog locale="nl" />
+</BaseLayout>
