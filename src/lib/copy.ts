@@ -48,8 +48,10 @@ export interface Copy {
 	altClearPostcode: string;
 	altReset: string;
 	noJs: string;
-	disclaimer: string;
 }
+
+/** Required verbatim on every public page, including English. */
+export const DISCLAIMER = 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.';
 
 export const COPY: Record<Locale, Copy> = {
 	nl: {
@@ -106,7 +108,6 @@ export const COPY: Record<Locale, Copy> = {
 		altClearPostcode: 'Wis de postcode en behoud de overige filters',
 		altReset: 'Toon alle dealers',
 		noJs: 'JavaScript is nodig om filters zonder herladen toe te passen. De dealercatalogus zelf blijft zichtbaar.',
-		disclaimer: 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.',
 	},
 	en: {
 		skip: 'Skip to content',
@@ -162,7 +163,6 @@ export const COPY: Record<Locale, Copy> = {
 		altClearPostcode: 'Clear the postcode and keep the other filters',
 		altReset: 'Show all dealers',
 		noJs: 'JavaScript is required to apply filters without a reload. The dealer catalogue itself remains visible.',
-		disclaimer: 'Demonstration company of Raderwerk. This company does not exist.',
 	},
 };
 

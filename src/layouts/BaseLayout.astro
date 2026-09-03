@@ -1,5 +1,5 @@
 ---
-import { COPY } from '../lib/copy';
+import { COPY, DISCLAIMER } from '../lib/copy';
 import type { Locale } from '../lib/labels';
 
 interface Props {
@@ -79,7 +79,7 @@ const langSwitchBase = isDealers ? otherDealersHref : otherHomeHref;
 			<slot />
 		</main>
 		<footer>
-			<p>{copy.disclaimer}</p>
+			<p lang="nl">{DISCLAIMER}</p>
 		</footer>
 	</body>
 </html>
