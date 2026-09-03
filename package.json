@@ -9,6 +9,7 @@
     "dev": "astro dev",
 		"build": "astro build",
 		"check:links": "node scripts/check-links.mjs",
+		"verify:datasheets": "node scripts/verify-datasheets.mjs",
 		"ci": "npm run typecheck && npm run test && npm run build && npm run check:links",
     "preview": "astro preview",
 		"test": "vitest run",

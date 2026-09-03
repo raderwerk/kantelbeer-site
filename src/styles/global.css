@@ -82,6 +82,33 @@ nav a:hover, nav a[aria-current] { color: var(--color-orange-dark); }
 .spec, .model { padding: 1.5rem; border-top: 2px solid var(--color-orange); background: var(--color-white); color: var(--color-ink); }
 .model { min-height: 13rem; border-top-color: var(--color-forest); }
 .model small { color: var(--color-muted); }
+.product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.product-card { display: flex; flex-direction: column; min-height: 19rem; padding: 1.5rem; border-top: .25rem solid var(--color-orange-dark); background: var(--color-white); }
+.product-card h3 { font-size: 1.25rem; }
+.product-card .card-link { margin-top: auto; }
+.product-code { margin-bottom: .5rem; color: var(--color-muted); font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
+.product-card dl { margin: 0 0 1.5rem; }
+.product-card dl div { display: flex; justify-content: space-between; gap: 1rem; padding-block: .45rem; border-bottom: 1px solid var(--color-line); }
+.product-card dt { color: var(--color-muted); }
+.product-card dd { margin: 0; font-weight: 700; text-align: right; }
+.table-scroll { max-width: 100%; overflow-x: auto; border: 1px solid var(--color-line); background: var(--color-white); }
+.table-scroll:focus-visible { outline: .2rem solid var(--color-orange); outline-offset: .2rem; }
+.specification-table { width: 100%; min-width: 36rem; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.specification-table caption { padding: 1rem; color: var(--color-ink); font-size: 1.2rem; font-weight: 800; text-align: left; }
+.specification-table th, .specification-table td { padding: .8rem 1rem; border-top: 1px solid var(--color-line); text-align: left; vertical-align: top; }
+.specification-table thead th { background: var(--color-forest); color: var(--color-white); }
+.specification-table tbody th { min-width: 11rem; color: var(--color-muted); font-size: .85rem; }
+.compare fieldset { padding: 0; border: 0; }
+.compare legend { margin-bottom: 1rem; font-size: 1.5rem; font-weight: 800; }
+.compare-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+.compare-options label { display: flex; gap: .75rem; min-width: 0; padding: 1rem; border: 1px solid var(--color-line); background: var(--color-white); cursor: pointer; }
+.compare-options input { flex: 0 0 auto; width: 1.3rem; min-height: 1.3rem; }
+.compare-options small { display: block; color: var(--color-muted); font-weight: 400; }
+.compare-status { margin-block: 1.5rem; font-weight: 800; }
+.compare-table [hidden] { display: none; }
+.datasheet { padding-block: 4rem; }
+.datasheet header { margin-bottom: 3rem; }
+.datasheet-note { margin-top: 1rem; color: var(--color-muted); font-size: .8rem; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 label { display: block; margin-bottom: .35rem; font-weight: 700; }
 input, textarea, select { width: 100%; min-height: 3rem; padding: .7rem; border: 1px solid var(--color-muted); border-radius: 0; background: var(--color-white); color: var(--color-ink); font: inherit; }
@@ -131,6 +158,7 @@ footer a:not(.footer-brand) { display: block; margin-block: .6rem; color: var(--
 	.machine { width: 25rem; opacity: .35; }
 	.intro-grid, .split { grid-template-columns: 1fr; }
 	.category-grid, .spec-grid, .model-grid { grid-template-columns: 1fr; }
+	.product-grid, .compare-options { grid-template-columns: repeat(2, 1fr); }
 	.category-card .visual { height: 10rem; }
 	.stats { grid-template-columns: 1fr; }
 	.footer-main { grid-template-columns: 1fr 1fr; }
@@ -149,5 +177,15 @@ footer a:not(.footer-brand) { display: block; margin-block: .6rem; color: var(--
 	.full { grid-column: auto; }
 	.footer-main { grid-template-columns: 1fr; }
 	.disclaimer { flex-direction: column; }
+	.product-grid, .compare-options { grid-template-columns: 1fr; }
+	.specification-table { min-width: 32rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print {
+	.utility, .navigation, footer, .print-button { display: none !important; }
+	body { background: #fff; }
+	.datasheet { width: 100%; padding: 0; }
+	.datasheet h1 { font-size: 3rem; }
+	.table-scroll { overflow: visible; border: 0; }
+	.specification-table { min-width: 0; }
+}

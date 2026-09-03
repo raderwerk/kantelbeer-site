@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categories } from '../../data/site';
+import { products } from '../../data/products';
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<BaseLayout title="Systemen" description="Vergelijk de twaalf hef- en kantelsystemen van Kantelbeer.">
+	<section class="page-hero"><div class="wrap"><p class="eyebrow">Productcatalogus</p><h1>Twaalf systemen. Eén meetlat.</h1><p>Selecteer maximaal drie systemen in de vergelijker of open een product voor alle specificaties en de datasheet.</p><a class="button" href={url('/vergelijken')}>Systemen vergelijken</a></div></section>
+	{categories.map(category => <section class="section wrap"><p class="eyebrow">{category.name}</p><h2>{category.title}</h2><div class="product-grid">{products.filter(product => product.category === category.slug).map(product => <article class="product-card"><p class="product-code">{product.name}</p><h3>{product.summary}</h3><dl><div><dt>Hefvermogen</dt><dd>{product.specifications.capacity}</dd></div><div><dt>Voeding</dt><dd>{product.specifications.power}</dd></div></dl><a class="card-link" href={url(`/producten/${product.category}/${product.slug}`)}>Bekijk specificaties →</a></article>)}</div></section>)}
+</BaseLayout>
