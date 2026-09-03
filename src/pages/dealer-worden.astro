@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import Icon from '../components/Icon.astro';
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<BaseLayout title="Dealer worden" description="Word partner in het Kantelbeer dealernetwerk.">
+	<section class="page-hero"><div class="wrap split"><div><p class="eyebrow">Samen sterk</p><h1>Groei mee met goed gereedschap.</h1></div><div><p class="lead">Ken jij de werkplaatsen in jouw regio en geloof je in techniek die lang meegaat? Dan maken we graag kennis.</p><a class="button" href={url('/contact#offerte')}>Start een gesprek <Icon name="arrow" /></a></div></div></section>
+	<section class="section dark-panel"><div class="wrap"><p class="eyebrow">Het dealerschap</p><h2>Jouw marktkennis. Onze slagkracht.</h2><div class="spec-grid"><article class="spec"><h3>Technische training</h3><p>Praktische producttraining en documentatie voor verkoop, installatie en onderhoud.</p></article><article class="spec"><h3>Directe ondersteuning</h3><p>Een vast aanspreekpunt voor aanvragen, configuraties en onderdelen.</p></article><article class="spec"><h3>Sterk assortiment</h3><p>Twaalf systemen met heldere positionering en een betrouwbare onderdelenlijn.</p></article></div></div></section>
+</BaseLayout>

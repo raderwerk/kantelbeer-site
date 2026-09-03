@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { categories } from '../../data/site';
+export function getStaticPaths() { return categories.map(category => ({ params: { slug: category.slug }, props: { category } })); }
+const { category } = Astro.props;
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<BaseLayout title={category.name} description={category.description}>
+	<section class="page-hero product-hero"><div class="wrap split"><div><p class="eyebrow">{category.label}</p><h1>{category.name}</h1></div><div><h2>{category.title}</h2><p>{category.description}</p><a class="button" href={url('/contact#offerte')}>Bespreek jouw toepassing <Icon name="arrow" /></a></div></div></section>
+	<section class="section wrap"><p class="eyebrow">In één oogopslag</p><div class="spec-grid">{category.specs.map((spec, index) => <div class="spec"><small>0{index + 1}</small><h3>{spec}</h3><p>Getest voor dagelijks professioneel gebruik.</p></div>)}</div></section>
+	<section class="section dark-panel"><div class="wrap"><p class="eyebrow">Modellen</p><h2>Kies de kracht die past.</h2><div class="model-grid">{category.models.map((model, index) => <article class="model"><small>{category.name} · 0{index + 1}</small><h3>{model}</h3><p>Betrouwbare hydrauliek, intuïtieve bediening en onderhoudsvriendelijke techniek.</p></article>)}</div></div></section>
+</BaseLayout>

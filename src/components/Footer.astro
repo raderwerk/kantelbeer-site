@@ -1,0 +1,12 @@
+---
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<footer>
+	<div class="footer-main wrap">
+		<div><a class="footer-brand" href={url('/')}>KANTELBEER</a><p>Doordacht in beweging.<br/>Gebouwd voor het echte werk.</p></div>
+		<div><h2>Systemen</h2><a href={url('/producten/hefbruggen')}>Hefbruggen</a><a href={url('/producten/kantelaars')}>Kantelaars</a><a href={url('/producten/werkplaatsliften')}>Werkplaatsliften</a></div>
+		<div><h2>Kantelbeer</h2><a href={url('/over-ons')}>Over ons</a><a href={url('/dealer-worden')}>Dealer worden</a><a href={url('/contact')}>Contact</a></div>
+		<div><h2>Direct naar</h2><a href={url('/dealerzoeker')}>Dealerzoeker</a><a href={url('/contact#offerte')}>Offerte aanvragen</a></div>
+	</div>
+	<div class="disclaimer wrap"><p>Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.</p><p>© 2026 Kantelbeer · Privacy · Voorwaarden</p></div>
+</footer>

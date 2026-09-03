@@ -1,61 +1,15 @@
 ---
-const title = 'Kantelbeer — hydraulische hef- en kantelsystemen';
-const description =
-	'Kantelbeer bouwt hydraulische hef- en kantelsystemen voor werkplaatsen en verkoopt uitsluitend via een dealernetwerk in de Benelux en Duitsland.';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { categories } from '../data/site';
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 ---
-
-<html lang="nl">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<header>
-			<p class="wordmark">Kantelbeer</p>
-		</header>
-		<main>
-			<h1>{title}</h1>
-			<p>{description}</p>
-			<p>
-				Deze site wordt opgebouwd langs de productcatalogus, de dealercatalogus en het
-				offerteaanvraagformulier. Zie de open issues in <code>raderwerk/kantelbeer-site</code>
-				voor de voortgang.
-			</p>
-		</main>
-		<footer>
-			<p>Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.</p>
-		</footer>
-	</body>
-</html>
-
-<style>
-	:root {
-		color-scheme: light;
-	}
-
-	body {
-		font-family: system-ui, sans-serif;
-		line-height: 1.5;
-		margin: 0 auto;
-		max-width: 40rem;
-		padding: 2rem 1.5rem 4rem;
-		color: #1a1a1a;
-	}
-
-	.wordmark {
-		font-weight: 700;
-		letter-spacing: 0.02em;
-	}
-
-	footer {
-		margin-top: 3rem;
-		padding-top: 1rem;
-		border-top: 1px solid #d0d6e0;
-		font-size: 0.875rem;
-		color: #555;
-	}
-</style>
+<BaseLayout title="Hydraulische systemen voor professionals" description="Kantelbeer ontwikkelt robuuste hef- en kantelsystemen voor het echte werk.">
+	<section class="hero">
+		<div class="wrap"><p class="eyebrow">Doordacht in beweging</p><h1>Zwaar werk. Licht gemaakt.</h1><p>Kantelbeer ontwikkelt hydraulische hef- en kantelsystemen die vakmensen veiliger, slimmer en efficiënter laten werken.</p><div class="hero-actions"><a class="button" href="#systemen">Bekijk onze systemen <Icon name="arrow" /></a><a class="button secondary" style="border-color: var(--color-white); color: var(--color-white)" href={url('/dealerzoeker')}>Vind een dealer</a></div></div>
+		<div class="machine" aria-hidden="true"></div>
+	</section>
+	<section class="section wrap intro-grid"><div><p class="eyebrow">Kantelbeer systemen</p><h2>Grip op ieder zwaar vraagstuk.</h2></div><div><p class="lead">In de werkplaats telt elke beweging. Daarom ontwerpen we systemen die kracht combineren met controle — gebouwd voor jarenlang betrouwbaar gebruik.</p><p>Van compacte mobiele lift tot complete kantelinstallatie. Altijd doordacht, altijd onderhoudsvriendelijk en altijd ondersteund door een specialist bij jou in de buurt.</p></div></section>
+	<section id="systemen" class="section wrap"><p class="eyebrow">Ons assortiment</p><div class="category-grid">{categories.map(category => <a class="category-card" href={url(`/producten/${category.slug}`)}><div class="visual" aria-hidden="true"></div><p class="eyebrow">{category.label}</p><h3>{category.name}</h3><p>{category.description}</p><span class="card-link">Ontdek {category.name.toLowerCase()} →</span></a>)}</div></section>
+	<section class="section dark-panel"><div class="wrap split"><div><p class="eyebrow">Waarom Kantelbeer</p><h2>Gebouwd om door te gaan.</h2></div><div><p class="lead">Geen overbodige complexiteit. Wel slimme techniek, sterke materialen en service die naast je staat.</p><div class="stats"><div class="stat"><strong>25+</strong><span>jaar ontwerpkennis</span></div><div class="stat"><strong>12</strong><span>doordachte systemen</span></div><div class="stat"><strong>40</strong><span>dealers in jouw regio</span></div></div></div></div></section>
+</BaseLayout>

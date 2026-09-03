@@ -31,6 +31,13 @@ De site draait dan op `http://localhost:4321`.
 | `npm run build` | Productiebuild naar `./dist/` |
 | `npm run preview` | Preview van de build |
 | `npm run typecheck` | `astro check`, het type- en templatecontrole-commando dat ook in CI draait |
+| `npm test` | Draait de unit-tests voor route-afleiding en de linkcontrole (inclusief foutpaden) |
+| `npm run check:links` | Controleert alle interne routes en in-page-ankers in de productiebuild en faalt bij een dode link |
+| `npm run ci` | Draait typecheck, tests, productiebuild en linkcontrole achter elkaar |
+
+## Pagina's en navigatie
+
+De merksite omvat home, drie productcategorieën, over ons, dealer worden, contact/offerte en de dealerzoeker. Alle productcategorieën zijn direct vanaf home bereikbaar. De site gebruikt uitsluitend lokale systeemlettertypen en CSS-vormen; er worden geen zware beeldbestanden of client-side scripts geladen.
 
 ## Bijdragen
 
