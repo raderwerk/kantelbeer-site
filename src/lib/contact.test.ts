@@ -42,7 +42,7 @@ describe('dealerContactHref', () => {
 describe('dealerContactLabel', () => {
 	it('does not present a mailto form contact as a web form', () => {
 		expect(dealerContactLabel(dealer({ kind: 'form', email: 'test@example.test' }), COPY.nl)).toBe(
-			'E-mail (contactformulier): test@example.test',
+			'E-mail (Contactformulier): test@example.test',
 		);
 	});
 
