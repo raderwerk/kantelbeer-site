@@ -33,7 +33,18 @@ CHROME_PATH=/path/to/chromium npx --yes lighthouse@12.8.2 \
 
 ## Contrast correction for the PR description
 
-The previous PR-description range of **5.49:1 to 10.64:1** is stale. After the review fix, the product-hero eyebrow uses ink on sand at **12.58:1**. The verified text combinations therefore range from **5.49:1 to 12.58:1**, exceeding the WCAG AA minimum of 4.5:1.
+The previous PR-description range of **5.49:1 to 10.64:1** is stale. After the review fix, the product-hero eyebrow uses ink on sand at **12.58:1**. The verified text combinations therefore range from **5.49:1 to 16.36:1**, including ink on white in the specification and model cards. This exceeds the WCAG AA minimum of 4.5:1.
+
+The home-page statistics now use sand on forest (**10.64:1**) instead of orange on forest (**3.94:1**). Although the original large, bold figures met the WCAG 3:1 threshold for large text, this change also satisfies the project's stricter blanket requirement of at least 4.5:1 for all text.
+
+## QA card-contrast follow-up
+
+The three product-category pages and the dealer page were visually checked at 1440 px against the production build after setting specification and model cards to ink on white (**16.36:1**). Their headings and descriptions are visible in the following evidence:
+
+- [`qa-producten-hefbruggen-1440.png`](./qa-producten-hefbruggen-1440.png)
+- [`qa-producten-kantelaars-1440.png`](./qa-producten-kantelaars-1440.png)
+- [`qa-producten-werkplaatsliften-1440.png`](./qa-producten-werkplaatsliften-1440.png)
+- [`qa-dealer-worden-1440.png`](./qa-dealer-worden-1440.png)
 
 ## Pull-request preview status
 

@@ -73,13 +73,13 @@ nav a:hover, nav a[aria-current] { color: var(--color-orange-dark); }
 .dark-panel { background: var(--color-forest); color: var(--color-white); }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 3rem; background: var(--color-forest-light); }
 .stat { padding: 2rem; background: var(--color-forest); }
-.stat strong { display: block; color: var(--color-orange); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; }
+.stat strong { display: block; color: var(--color-sand); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; }
 .page-hero { padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--color-line); }
 .page-hero p { max-width: 42rem; font-size: 1.2rem; }
 .product-hero { background: var(--color-sand); }
 .product-hero .eyebrow { color: var(--color-ink); }
 .spec-grid, .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.spec, .model { padding: 1.5rem; border-top: 2px solid var(--color-orange); background: var(--color-white); }
+.spec, .model { padding: 1.5rem; border-top: 2px solid var(--color-orange); background: var(--color-white); color: var(--color-ink); }
 .model { min-height: 13rem; border-top-color: var(--color-forest); }
 .model small { color: var(--color-muted); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
