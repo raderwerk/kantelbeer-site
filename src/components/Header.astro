@@ -1,0 +1,20 @@
+---
+import { nav } from '../data/site';
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<header class="site-header">
+	<div class="utility wrap"><span>Hydraulische systemen voor professionals</span><span>NL <i aria-hidden="true">·</i> <a href="#language">EN</a></span></div>
+	<div class="navigation wrap">
+		<a class="brand" href={url('/')} aria-label="Kantelbeer, naar home"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><strong>KANTELBEER</strong></a>
+		<nav aria-label="Hoofdnavigatie">
+			<ul>
+				{nav.map((item) => <li class="nav-item">
+					<a href={item.href === '/producten' ? url('/#systemen') : url(item.href)} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+					{'children' in item && <ul class="dropdown">{item.children.map(child => <li><a href={url(child.href)}>{child.label}</a></li>)}</ul>}
+				</li>)}
+			</ul>
+		</nav>
+		<a class="dealer-link" href={url('/dealerzoeker')}>Vind een dealer <span aria-hidden="true">↗</span></a>
+	</div>
+</header>

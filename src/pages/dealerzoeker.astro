@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import Icon from '../components/Icon.astro';
+---
+<BaseLayout title="Dealerzoeker" description="Vind een Kantelbeer dealer in je regio.">
+	<section class="page-hero product-hero"><div class="wrap"><p class="eyebrow">40 verkooppunten</p><h1>Een specialist dichtbij.</h1><p>Vind een fictieve Kantelbeer-dealer voor advies, installatie en onderhoud in jouw regio.</p></div></section>
+	<section class="section wrap split"><div><h2>Zoek op regio</h2><label for="regio">Land of regio</label><select id="regio"><option>Alle regio’s</option><option>Nederland</option><option>België</option><option>Luxemburg</option><option>Duitsland</option></select></div><div class="dealer-list" aria-live="polite"><article class="dealer"><Icon name="pin"/><h3>Dealer Noord</h3><p>Noord-Nederland · Hefbruggen en werkplaatsliften</p><a href="../contact/">Neem contact op →</a></article><article class="dealer"><Icon name="pin"/><h3>Dealer Midden</h3><p>Midden-Nederland · Volledig assortiment</p><a href="../contact/">Neem contact op →</a></article><article class="dealer"><Icon name="pin"/><h3>Dealer Zuid</h3><p>Zuid-Nederland en België · Kantelaars en service</p><a href="../contact/">Neem contact op →</a></article></div></section>
+</BaseLayout>
