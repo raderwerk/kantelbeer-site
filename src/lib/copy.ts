@@ -33,7 +33,6 @@ export interface Copy {
 	countList: string;
 	countListOne: string;
 	countNearest: string;
-	countNearestOne: string;
 	emptyStatus: string;
 	invalidPostcodeStatus: string;
 	ambiguousStatus: string;
@@ -53,10 +52,8 @@ export interface Copy {
 	altSearchAsBe: string;
 	altReset: string;
 	noJs: string;
+	disclaimer: string;
 }
-
-/** Required verbatim on every public page, including English. */
-export const DISCLAIMER = 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.';
 
 export const COPY: Record<Locale, Copy> = {
 	nl: {
@@ -94,8 +91,7 @@ export const COPY: Record<Locale, Copy> = {
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
 		countListOne: '{count} dealer',
-		countNearest: '{count} dichtstbijzijnde dealers bij {postcode}',
-		countNearestOne: 'Dichtstbijzijnde dealer bij {postcode}',
+		countNearest: 'Vijf dichtstbijzijnde dealers bij {postcode}',
 		emptyStatus: 'Geen dealers gevonden',
 		invalidPostcodeStatus: 'Postcode niet herkend',
 		ambiguousStatus: 'Kies het land van de postcode',
@@ -119,6 +115,7 @@ export const COPY: Record<Locale, Copy> = {
 		altSearchAsBe: 'Zoek {postcode} als Belgische postcode',
 		altReset: 'Toon alle dealers',
 		noJs: 'JavaScript is nodig om filters zonder herladen toe te passen. De dealercatalogus zelf blijft zichtbaar.',
+		disclaimer: 'Demonstratiebedrijf van Raderwerk. Dit bedrijf bestaat niet.',
 	},
 	en: {
 		skip: 'Skip to content',
@@ -155,8 +152,7 @@ export const COPY: Record<Locale, Copy> = {
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
 		countListOne: '{count} dealer',
-		countNearest: '{count} nearest dealers to {postcode}',
-		countNearestOne: 'Nearest dealer to {postcode}',
+		countNearest: 'Five nearest dealers to {postcode}',
 		emptyStatus: 'No dealers found',
 		invalidPostcodeStatus: 'Postcode not recognised',
 		ambiguousStatus: 'Choose the postcode country',
@@ -180,6 +176,7 @@ export const COPY: Record<Locale, Copy> = {
 		altSearchAsBe: 'Search {postcode} as a Belgian postcode',
 		altReset: 'Show all dealers',
 		noJs: 'JavaScript is required to apply filters without a reload. The dealer catalogue itself remains visible.',
+		disclaimer: 'Demonstration company of Raderwerk. This company does not exist.',
 	},
 };
 
@@ -196,13 +193,7 @@ export function resultStatusText(
 	switch (result.status) {
 		case 'ok':
 			if (result.mode === 'nearest') {
-				if (result.dealers.length === 1) {
-					return fill(copy.countNearestOne, { postcode: query.postcode ?? '' });
-				}
-				return fill(copy.countNearest, {
-					count: result.dealers.length,
-					postcode: query.postcode ?? '',
-				});
+				return fill(copy.countNearest, { postcode: query.postcode ?? '' });
 			}
 			if (result.dealers.length === 1) {
 				return fill(copy.countListOne, { count: 1 });

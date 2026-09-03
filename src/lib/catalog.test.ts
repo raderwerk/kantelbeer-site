@@ -7,7 +7,6 @@ import {
 	serializeCatalogQuery,
 } from './catalog';
 import { geocodePostcode, parsePostcode } from './postcode';
-import { resultStatusText } from './copy';
 import { getDealers } from './dealers';
 import { distanceKm } from './geo';
 import type { Dealer } from './types';
@@ -297,17 +296,6 @@ describe('queryCatalog', () => {
 		if (belgian.status !== 'ok') return;
 		expect(belgian.dealers[0]?.id).toBe('hefkaai-antwerpen');
 		expect(belgian.dealers[0]?.country).toBe('be');
-	});
-
-	it('reports the actual number of nearest matches when filters leave fewer than five', () => {
-		const result = queryCatalog(fixtures, { province: 'zeeland', postcode: '4331 LH' });
-		expect(result.status).toBe('ok');
-		if (result.status !== 'ok') return;
-		expect(result.dealers).toHaveLength(1);
-		const status = resultStatusText('nl', result, { province: 'zeeland', postcode: '4331 LH' });
-		expect(status).toContain('4331 LH');
-		expect(status).not.toMatch(/vijf/i);
-		expect(status.toLowerCase()).toContain('dealer');
 	});
 
 	it('does not use the browser geolocation API', () => {

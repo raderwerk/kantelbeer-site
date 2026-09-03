@@ -26,14 +26,15 @@ export function bindCatalog(root: HTMLElement): void {
 		const result = queryCatalog(dealers, query);
 		if (historyMode !== 'none') {
 			writeUrl(query, historyMode);
+			syncLanguageLinks(query);
 		}
 
 		status.textContent = resultStatusText(locale, result, query);
 		renderResult(result, { locale, copy, list, empty, apply });
-		syncLanguageLinks(query);
 	};
 
 	apply(parseCatalogQuery(window.location.search), 'none');
+	syncLanguageLinks(parseCatalogQuery(window.location.search));
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();

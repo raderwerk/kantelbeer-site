@@ -35,7 +35,7 @@ De site draait dan op `http://localhost:4321`.
 
 ## Dealercatalogus
 
-De dealercatalogus staat op `/dealers/` (EN: `/en/dealers/`). Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
+De dealercatalogus staat op `/dealerzoeker/`. Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
 
 | Parameter | Betekenis |
 |---|---|

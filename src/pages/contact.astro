@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact en offerte" description="Bespreek je werkplaatsvraag met een Kantelbeer specialist.">
+	<section class="page-hero"><div class="wrap"><p class="eyebrow">Contact</p><h1>Vertel ons wat er moet bewegen.</h1><p>Deel je toepassing en wensen. Een specialist uit het fictieve dealernetwerk helpt je de juiste richting te kiezen.</p></div></section>
+	<section id="offerte" class="section wrap split"><div><p class="eyebrow">Offerte aanvragen</p><h2>Van vraag naar passend systeem.</h2><p>Dit demonstratieformulier verzendt geen persoonsgegevens. Alle velden zijn uitsluitend bedoeld om de gebruikerservaring te tonen.</p></div><form aria-label="Offerteaanvraag"><div class="form-grid"><div><label for="naam">Naam</label><input id="naam" name="naam" autocomplete="name" /></div><div><label for="organisatie">Organisatie</label><input id="organisatie" name="organisatie" autocomplete="organization" /></div><div><label for="systeem">Interesse in</label><select id="systeem" name="systeem"><option>Kies een systeem</option><option>Hefbruggen</option><option>Kantelaars</option><option>Werkplaatsliften</option></select></div><div><label for="postcode">Postcode</label><input id="postcode" name="postcode" autocomplete="postal-code" /></div><div class="full"><label for="vraag">Jouw toepassing</label><textarea id="vraag" name="vraag"></textarea></div><div class="full"><button class="button" type="button">Vraag gesprek aan</button></div></div></form></section>
+</BaseLayout>
