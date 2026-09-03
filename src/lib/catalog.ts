@@ -1,7 +1,7 @@
 import type { CatalogQuery, Dealer, DealerType, RankedDealer } from './types';
 import { isCountry, isDealerType } from './types';
 import { distanceKm } from './geo';
-import { geocodePostcode } from './postcode';
+import { geocodePostcode, isAmbiguousFourDigitPostcode } from './postcode';
 import type { CatalogAlternative, CatalogResult } from './types';
 
 export function parseCatalogQuery(search: string): CatalogQuery {
@@ -49,6 +49,25 @@ export function queryCatalog(dealers: Dealer[], query: CatalogQuery): CatalogRes
 	const filtered = filterDealers(dealers, query);
 
 	if (query.postcode) {
+		if (isAmbiguousFourDigitPostcode(query.postcode, query.country)) {
+			return {
+				status: 'ambiguous-postcode',
+				mode: 'nearest',
+				dealers: [],
+				messageKey: 'ambiguousPostcode',
+				alternatives: [
+					{
+						key: 'searchAsNl',
+						params: { ...query, country: 'nl' },
+					},
+					{
+						key: 'searchAsBe',
+						params: { ...query, country: 'be' },
+					},
+				],
+			};
+		}
+
 		const origin = geocodePostcode(query.postcode, query.country);
 		if (!origin) {
 			return {

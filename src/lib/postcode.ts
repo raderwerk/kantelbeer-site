@@ -297,9 +297,6 @@ export function parsePostcode(input: string, country?: Country): ParsedPostcode 
 	if (/^\d{4}[A-Z]{2}$/.test(compact)) {
 		return parseForCountry(compact, 'nl');
 	}
-	if (/^\d{4}$/.test(compact)) {
-		return parseForCountry(compact, 'nl');
-	}
 	return null;
 }
 
@@ -309,6 +306,14 @@ export function geocodePostcode(input: string, country?: Country): LatLng | null
 		return null;
 	}
 	return lookupPrefix(parsed.country, parsed.prefix);
+}
+
+export function isAmbiguousFourDigitPostcode(input: string, country?: Country): boolean {
+	if (country) {
+		return false;
+	}
+	const compact = input.trim().toUpperCase().replace(/\s+/g, '');
+	return /^\d{4}$/.test(compact);
 }
 
 function parseForCountry(compact: string, country: Country): ParsedPostcode | null {

@@ -42,7 +42,7 @@ De dealercatalogus staat op `/dealers/` (EN: `/en/dealers/`). Filters werken in 
 | `provincie` | slug, bijvoorbeeld `zeeland` of `nordrhein-westfalen` |
 | `type` | `verkoop`, `service` of `beide` (`verkoop`/`service` sluiten ook dealers van type `beide` in) |
 | `postcode` | zoekopdracht; toont de vijf dichtstbijzijnde dealers met afstand |
-| `land` | optioneel `nl`, `be` of `de` om een viercijferige postcode te disambigueren |
+| `land` | `nl`, `be` of `de`. Verplicht voor een kale viercijferige postcode (NL/BE-botsing); Nederlandse postcodes met letters (`1234 AB`) en Duitse vijfcijferige codes worden herkend zonder dit veld |
 
 De veertig fictieve dealers staan in één databestand: `src/data/dealers.json`. Postcodezoeken gebruikt lokale prefix-coördinaten (geen kaartdienst, geen `geolocation`). Een leeg filterresultaat toont een boodschap met alternatieve links, geen lege lijst.
 

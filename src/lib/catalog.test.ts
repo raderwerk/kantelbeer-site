@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
 	filterDealers,
@@ -6,6 +7,7 @@ import {
 	serializeCatalogQuery,
 } from './catalog';
 import { geocodePostcode, parsePostcode } from './postcode';
+import { getDealers } from './dealers';
 import { distanceKm } from './geo';
 import type { Dealer } from './types';
 
@@ -175,6 +177,15 @@ describe('postcode parsing and geocoding', () => {
 		expect(distanceKm(cologne!, { lat: 50.9375, lng: 6.9603 })).toBeLessThan(25);
 	});
 
+	it('does not treat a four-digit code as Dutch when the country is not set', () => {
+		expect(parsePostcode('2000')).toBeNull();
+		expect(geocodePostcode('2000')).toBeNull();
+		expect(geocodePostcode('9000')).toBeNull();
+		expect(geocodePostcode('2000', 'be')?.lat).toBeCloseTo(51.2213, 2);
+		expect(geocodePostcode('2000', 'nl')?.lat).toBeCloseTo(52.3874, 2);
+		expect(geocodePostcode('9000', 'be')?.lat).toBeCloseTo(51.0543, 2);
+	});
+
 	it('returns null for unusable input', () => {
 		expect(geocodePostcode('')).toBeNull();
 		expect(geocodePostcode('abc')).toBeNull();
@@ -264,8 +275,41 @@ describe('queryCatalog', () => {
 		expect(result.alternatives.some((item) => item.params.postcode === undefined)).toBe(true);
 	});
 
-	it('does not call or require browser geolocation', () => {
-		expect(typeof navigator === 'undefined' || !('geolocation' in navigator) || true).toBe(true);
+	it('asks for a country instead of ranking a Belgian four-digit postcode as Dutch', () => {
+		const result = queryCatalog(getDealers(), { postcode: '2000' });
+		expect(result.status).toBe('ambiguous-postcode');
+		if (result.status !== 'ambiguous-postcode') return;
+		expect(result.dealers).toEqual([]);
+		expect(
+			result.alternatives.some(
+				(item) => item.params.country === 'be' && item.params.postcode === '2000',
+			),
+		).toBe(true);
+		expect(
+			result.alternatives.some(
+				(item) => item.params.country === 'nl' && item.params.postcode === '2000',
+			),
+		).toBe(true);
+
+		const belgian = queryCatalog(getDealers(), { postcode: '2000', country: 'be' });
+		expect(belgian.status).toBe('ok');
+		if (belgian.status !== 'ok') return;
+		expect(belgian.dealers[0]?.id).toBe('hefkaai-antwerpen');
+		expect(belgian.dealers[0]?.country).toBe('be');
+	});
+
+	it('does not use the browser geolocation API', () => {
+		const files = [
+			'src/lib/catalog.ts',
+			'src/lib/catalog-ui.ts',
+			'src/lib/postcode.ts',
+			'src/lib/geo.ts',
+			'src/lib/dealers.ts',
+			'src/components/DealerCatalog.astro',
+		];
+		for (const file of files) {
+			expect(readFileSync(file, 'utf8'), file).not.toMatch(/geolocation/i);
+		}
 		const result = queryCatalog(fixtures, { postcode: '3511 WS' });
 		expect(result.status).toBe('ok');
 	});

@@ -36,7 +36,14 @@ export interface CatalogQuery {
 export type RankedDealer = Dealer & { distanceKm?: number };
 
 export interface CatalogAlternative {
-	key: 'allInProvince' | 'typeNationwide' | 'nearestAll' | 'clearPostcode' | 'reset';
+	key:
+		| 'allInProvince'
+		| 'typeNationwide'
+		| 'nearestAll'
+		| 'clearPostcode'
+		| 'reset'
+		| 'searchAsNl'
+		| 'searchAsBe';
 	params: CatalogQuery;
 }
 
@@ -54,6 +61,13 @@ export type CatalogResult =
 			mode: 'nearest';
 			dealers: [];
 			messageKey: 'invalidPostcode';
+			alternatives: CatalogAlternative[];
+	  }
+	| {
+			status: 'ambiguous-postcode';
+			mode: 'nearest';
+			dealers: [];
+			messageKey: 'ambiguousPostcode';
 			alternatives: CatalogAlternative[];
 	  };
 

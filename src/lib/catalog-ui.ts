@@ -21,11 +21,11 @@ export function bindCatalog(root: HTMLElement): void {
 		return;
 	}
 
-	const apply = (query: CatalogQuery, updateUrl: boolean) => {
+	const apply = (query: CatalogQuery, historyMode: 'none' | 'replace' | 'push') => {
 		syncForm(form, query);
 		const result = queryCatalog(dealers, query);
-		if (updateUrl) {
-			writeUrl(query);
+		if (historyMode !== 'none') {
+			writeUrl(query, historyMode);
 			syncLanguageLinks(query);
 		}
 
@@ -33,28 +33,28 @@ export function bindCatalog(root: HTMLElement): void {
 		renderResult(result, { locale, copy, list, empty, apply });
 	};
 
-	apply(parseCatalogQuery(window.location.search), false);
+	apply(parseCatalogQuery(window.location.search), 'none');
 	syncLanguageLinks(parseCatalogQuery(window.location.search));
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-		apply(readForm(form), true);
+		apply(readForm(form), 'push');
 	});
 
 	form.addEventListener('reset', (event) => {
 		event.preventDefault();
-		apply({}, true);
+		apply({}, 'push');
 	});
 
 	form.addEventListener('change', (event) => {
 		const target = event.target;
 		if (!(target instanceof HTMLElement)) return;
 		if (target.getAttribute('name') === 'postcode') return;
-		apply(readForm(form), true);
+		apply(readForm(form), 'replace');
 	});
 
 	window.addEventListener('popstate', () => {
-		apply(parseCatalogQuery(window.location.search), false);
+		apply(parseCatalogQuery(window.location.search), 'none');
 	});
 }
 
@@ -65,7 +65,7 @@ function renderResult(
 		copy: (typeof COPY)[Locale];
 		list: HTMLElement;
 		empty: HTMLElement;
-		apply: (query: CatalogQuery, updateUrl: boolean) => void;
+		apply: (query: CatalogQuery, historyMode: 'none' | 'replace' | 'push') => void;
 	},
 ): void {
 	if (result.status === 'ok') {
@@ -89,7 +89,7 @@ function renderEmpty(
 	ctx: {
 		locale: Locale;
 		copy: (typeof COPY)[Locale];
-		apply: (query: CatalogQuery, updateUrl: boolean) => void;
+		apply: (query: CatalogQuery, historyMode: 'none' | 'replace' | 'push') => void;
 	},
 ): HTMLElement {
 	const box = document.createElement('div');
@@ -109,7 +109,7 @@ function renderEmpty(
 		link.textContent = alternativeLabel(ctx.locale, alternative);
 		link.addEventListener('click', (event) => {
 			event.preventDefault();
-			ctx.apply(alternative.params, true);
+			ctx.apply(alternative.params, 'push');
 		});
 		item.append(link);
 		list.append(item);
@@ -184,10 +184,15 @@ function setControl(form: HTMLFormElement, name: string, value: string): void {
 	}
 }
 
-function writeUrl(query: CatalogQuery): void {
+function writeUrl(query: CatalogQuery, mode: 'replace' | 'push'): void {
 	const url = new URL(window.location.href);
 	url.search = serializeCatalogQuery(query).replace(/^\?/, '');
-	history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+	const next = `${url.pathname}${url.search}${url.hash}`;
+	if (mode === 'push') {
+		history.pushState(null, '', next);
+		return;
+	}
+	history.replaceState(null, '', next);
 }
 
 function syncLanguageLinks(query: CatalogQuery): void {

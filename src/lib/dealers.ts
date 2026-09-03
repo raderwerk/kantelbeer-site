@@ -3,8 +3,8 @@ import type { Country, Dealer, DealerContact, DealerType } from './types';
 import { isCountry, isDealerType } from './types';
 
 export function getDealers(): Dealer[] {
-	if (!Array.isArray(raw.dealers) || raw.dealers.length !== 40) {
-		throw new Error('Dealer catalog must contain exactly 40 dealers.');
+	if (!Array.isArray(raw.dealers)) {
+		throw new Error('Dealer catalog is missing.');
 	}
 	return raw.dealers.map(parseDealer);
 }
