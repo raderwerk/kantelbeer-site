@@ -1,3 +1,5 @@
+export const categoryRoute = (slug: string) => `/producten/${slug}`;
+
 export const categories = [
 	{
 		slug: 'hefbruggen',
@@ -29,7 +31,7 @@ export const categories = [
 ] as const;
 
 export const nav = [
-	{ href: '/producten', label: 'Systemen', children: categories.map(({ slug, name }) => ({ href: `/producten/${slug}`, label: name })) },
+	{ href: '/producten', label: 'Systemen', children: categories.map(({ slug, name }) => ({ href: categoryRoute(slug), label: name })) },
 	{ href: '/over-ons', label: 'Over ons' },
 	{ href: '/dealer-worden', label: 'Dealer worden' },
 	{ href: '/contact', label: 'Contact' },

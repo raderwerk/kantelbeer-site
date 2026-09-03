@@ -22,7 +22,7 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--color-cream); color: var(--color-ink); font-family: Arial, Helvetica, sans-serif; line-height: 1.55; overflow-wrap: break-word; }
 a { color: inherit; text-underline-offset: .2em; }
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: .2rem solid var(--color-orange); outline-offset: .2rem; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: .2rem solid var(--color-orange); outline-offset: .2rem; }
 .skip-link { position: fixed; z-index: 20; top: .5rem; left: .5rem; padding: .75rem 1rem; transform: translateY(-150%); background: var(--color-white); color: var(--color-ink); font-weight: 700; }
 .skip-link:focus { transform: none; }
 .wrap { width: min(100% - 3rem, 78rem); margin-inline: auto; }
@@ -44,6 +44,7 @@ h3 { font-size: 1.4rem; }
 .brand-mark i { display: block; width: .65rem; height: 1.7rem; background: var(--color-orange); }
 .brand-mark i:last-child { height: 1.15rem; }
 nav { margin-left: auto; }
+.mobile-menu { display: none; }
 nav ul { display: flex; gap: 1.75rem; margin: 0; padding: 0; list-style: none; }
 .nav-item { position: relative; }
 nav a { display: block; padding: 1rem .1rem; font-size: .88rem; font-weight: 700; text-decoration: none; }
@@ -76,6 +77,7 @@ nav a:hover, nav a[aria-current] { color: var(--color-orange-dark); }
 .page-hero { padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--color-line); }
 .page-hero p { max-width: 42rem; font-size: 1.2rem; }
 .product-hero { background: var(--color-sand); }
+.product-hero .eyebrow { color: var(--color-ink); }
 .spec-grid, .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .spec, .model { padding: 1.5rem; border-top: 2px solid var(--color-orange); background: var(--color-white); }
 .model { min-height: 13rem; border-top-color: var(--color-forest); }
@@ -114,9 +116,15 @@ footer a:not(.footer-brand) { display: block; margin-block: .6rem; color: var(--
 .disclaimer p { margin: 0; }
 @media (max-width: 800px) {
 	.wrap { width: min(100% - 2rem, 78rem); }
-	.utility span:first-child, nav { display: none; }
+	.utility span:first-child, .navigation > nav { display: none; }
 	.utility { justify-content: flex-end; }
 	.navigation { min-height: 4.5rem; gap: 1rem; }
+	.mobile-menu { position: relative; display: block; margin-left: auto; }
+	.mobile-menu summary { min-height: 2.75rem; padding: .65rem .8rem; border: 1px solid var(--color-ink); font-size: .85rem; font-weight: 800; cursor: pointer; }
+	.mobile-menu nav { position: absolute; z-index: 10; top: calc(100% + .5rem); right: 0; width: min(20rem, calc(100vw - 2rem)); padding: 1rem; background: var(--color-white); box-shadow: var(--shadow); }
+	.mobile-menu nav ul { display: block; }
+	.mobile-menu nav ul ul { padding-left: 1rem; border-left: 2px solid var(--color-sand); }
+	.mobile-menu nav a { padding: .55rem; }
 	.dealer-link { margin-left: auto; }
 	.hero { min-height: 43rem; }
 	.hero h1 { position: relative; z-index: 1; }

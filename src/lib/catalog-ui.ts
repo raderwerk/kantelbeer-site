@@ -10,7 +10,7 @@ import { isCountry, isDealerType } from './types';
 const dealers = getDealers();
 
 export function bindCatalog(root: HTMLElement): void {
-	const locale: Locale = root.dataset.locale === 'en' ? 'en' : 'nl';
+	const locale: Locale = 'nl';
 	const copy = COPY[locale];
 	const form = root.querySelector<HTMLFormElement>('[data-catalog-form]');
 	const status = root.querySelector<HTMLElement>('[data-catalog-status]');
@@ -209,8 +209,8 @@ function stringValue(value: FormDataEntryValue | null): string | undefined {
 	return trimmed ? trimmed : undefined;
 }
 
-export function formatDistance(km: number, locale: Locale): string {
+export function formatDistance(km: number, _locale: Locale): string {
 	const rounded = km < 10 ? km.toFixed(1) : Math.round(km).toString();
-	const value = locale === 'nl' ? rounded.replace('.', ',') : rounded;
+	const value = rounded.replace('.', ',');
 	return `${value} km`;
 }
