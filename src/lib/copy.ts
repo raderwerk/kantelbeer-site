@@ -31,7 +31,10 @@ export interface Copy {
 	reset: string;
 	resultsHeading: string;
 	countList: string;
+	countListOne: string;
 	countNearest: string;
+	emptyStatus: string;
+	invalidPostcodeStatus: string;
 	distance: string;
 	contactEmail: string;
 	contactPhone: string;
@@ -83,7 +86,10 @@ export const COPY: Record<Locale, Copy> = {
 		reset: 'Wis filters',
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
+		countListOne: '{count} dealer',
 		countNearest: 'Vijf dichtstbijzijnde dealers bij {postcode}',
+		emptyStatus: 'Geen dealers gevonden',
+		invalidPostcodeStatus: 'Postcode niet herkend',
 		distance: '{distance} van de postcode',
 		contactEmail: 'E-mail',
 		contactPhone: 'Telefoon',
@@ -136,7 +142,10 @@ export const COPY: Record<Locale, Copy> = {
 		reset: 'Clear filters',
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
+		countListOne: '{count} dealer',
 		countNearest: 'Five nearest dealers to {postcode}',
+		emptyStatus: 'No dealers found',
+		invalidPostcodeStatus: 'Postcode not recognised',
 		distance: '{distance} from the postcode',
 		contactEmail: 'Email',
 		contactPhone: 'Phone',
@@ -172,11 +181,14 @@ export function resultStatusText(
 			if (result.mode === 'nearest') {
 				return fill(copy.countNearest, { postcode: query.postcode ?? '' });
 			}
+			if (result.dealers.length === 1) {
+				return fill(copy.countListOne, { count: 1 });
+			}
 			return fill(copy.countList, { count: result.dealers.length });
 		case 'empty':
-			return copy[result.messageKey];
+			return copy.emptyStatus;
 		case 'invalid-postcode':
-			return copy.invalidPostcode;
+			return copy.invalidPostcodeStatus;
 		default: {
 			const exhaustive: never = result;
 			return exhaustive;
