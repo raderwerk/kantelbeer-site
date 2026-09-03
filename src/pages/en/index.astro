@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COPY } from '../../lib/copy';
+
+const copy = COPY.en;
+const dealersHref = `${import.meta.env.BASE_URL}en/dealers`;
+---
+<BaseLayout locale="en" title={copy.homeTitle} description={copy.homeDescription}>
+	<section class="hero"><div class="wrap"><p class="eyebrow">Thoughtfully in motion</p><h1>Heavy work. Made light.</h1><p>{copy.homeDescription}</p><div class="hero-actions"><a class="button" href={dealersHref}>{copy.homeCta}</a></div></div><div class="machine" aria-hidden="true"></div></section>
+	<section class="section wrap intro-grid"><div><p class="eyebrow">Kantelbeer systems</p><h2>Control over every heavy challenge.</h2></div><div><p class="lead">{copy.homeLead}</p></div></section>
+</BaseLayout>

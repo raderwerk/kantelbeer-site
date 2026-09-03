@@ -1,0 +1,105 @@
+---
+import { getDealers } from '../lib/dealers';
+import { COPY } from '../lib/copy';
+import type { Locale } from '../lib/labels';
+import { countryLabel, provinceLabel, provincesByCountry, typeLabel } from '../lib/labels';
+import { dealerContactHref, dealerContactLabel } from '../lib/contact';
+import type { DealerType } from '../lib/types';
+import { DEALER_TYPES } from '../lib/types';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = COPY[locale];
+const dealers = getDealers();
+const grouped = provincesByCountry([...new Set(dealers.map((dealer) => dealer.province))]);
+const types: DealerType[] = DEALER_TYPES;
+---
+
+<section data-dealer-catalog data-locale={locale}>
+	<p class="lead">{copy.catalogLead}</p>
+	<noscript><p>{copy.noJs}</p></noscript>
+	<form class="catalog-form" method="get" data-catalog-form>
+		<fieldset>
+			<legend>{copy.filtersLegend}</legend>
+			<div class="field">
+				<label for="provincie">{copy.provinceLabel}</label>
+				<select id="provincie" name="provincie" autocomplete="address-level1">
+					<option value="">{copy.allProvinces}</option>
+					{
+						grouped.map((group) => (
+							<optgroup label={countryLabel(group.country, locale)}>
+								{group.provinces.map((province) => (
+									<option value={province.slug}>{provinceLabel(province.slug, locale)}</option>
+								))}
+							</optgroup>
+						))
+					}
+				</select>
+			</div>
+			<div class="field">
+				<label for="type">{copy.typeLabel}</label>
+				<select id="type" name="type">
+					<option value="">{copy.allTypes}</option>
+					{types.map((type) => <option value={type}>{typeLabel(type, locale)}</option>)}
+				</select>
+			</div>
+			<div class="field">
+				<label for="postcode">{copy.postcodeLabel}</label>
+				<input
+					id="postcode"
+					name="postcode"
+					inputmode="text"
+					autocomplete="postal-code"
+					spellcheck="false"
+					aria-describedby="postcode-hint"
+				/>
+				<p id="postcode-hint" class="hint">{copy.postcodeHint}</p>
+			</div>
+			<div class="field">
+				<label for="land">{copy.countryLabel}</label>
+				<select id="land" name="land">
+					<option value="">{copy.countryAuto}</option>
+					<option value="nl">{countryLabel('nl', locale)}</option>
+					<option value="be">{countryLabel('be', locale)}</option>
+					<option value="de">{countryLabel('de', locale)}</option>
+				</select>
+			</div>
+			<div class="actions">
+				<button type="submit">{copy.searchSubmit}</button>
+				<button type="reset">{copy.reset}</button>
+			</div>
+		</fieldset>
+	</form>
+	<h2 class="visually-hidden">{copy.resultsHeading}</h2>
+	<p class="catalog-status" data-catalog-status aria-live="polite">{copy.resultsHeading}</p>
+	<div data-catalog-empty hidden></div>
+	<ul class="dealer-grid" data-catalog-list>
+		{
+			dealers.map((dealer) => (
+				<li>
+					<article class="dealer-card">
+						<h3>{dealer.name}</h3>
+						<p class="dealer-card__type">{typeLabel(dealer.type, locale)}</p>
+						<address class="dealer-card__address">
+							{dealer.street}, {dealer.postcode} {dealer.city}, {provinceLabel(dealer.province, locale)}
+						</address>
+						<p>
+							<a href={dealerContactHref(dealer)}>{dealerContactLabel(dealer, copy)}</a>
+						</p>
+					</article>
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<script>
+	import { bindCatalog } from '../lib/catalog-ui';
+
+	for (const root of document.querySelectorAll('[data-dealer-catalog]')) {
+		bindCatalog(root as HTMLElement);
+	}
+</script>
