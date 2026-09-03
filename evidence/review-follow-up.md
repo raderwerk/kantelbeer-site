@@ -50,4 +50,16 @@ The three product-category pages and the dealer page were visually checked at 14
 
 Acceptance criterion 1 is **not currently achievable in this repository setup**. `.github/workflows/pages.yml` only deploys on a push to `main` (or a manual dispatch), while the issue requires a unique preview for every pull request. Consequently PR #2 cannot provide the required preview URL or issue attachment from the current workflow. This is intentionally left for a human decision: no production or Pages deployment was initiated as part of this follow-up, and this criterion must remain unchecked until preview infrastructure is approved and added.
 
+## Mobile-menu QA follow-up
+
+The mobile menu is positioned relative to the full navigation bar rather than the
+`Menu` summary. Its panel and every menu link were measured with the menu open at
+320, 360, 390, 430, and 540 CSS pixels wide; every left edge was at or above zero.
+
+The complete verified text-contrast range remains **5.49:1–16.36:1**. The approved
+card and statistic contrast changes are unchanged.
+
+The 102 `libc` metadata lines introduced by npm 10.9.4 were reverted to the lockfile
+produced before that tooling-only change, avoiding an unrelated conflict with PR #1.
+
 Ontwikkelaar · GPT-5.6 Sol

@@ -100,8 +100,8 @@ footer a:not(.footer-brand) { display: block; margin-block: .6rem; color: var(--
 	.wrap { width: min(100% - 2rem, 78rem); }
 	.utility span:first-child, .navigation > nav { display: none; }
 	.utility { justify-content: flex-end; }
-	.navigation { min-height: 4.5rem; gap: 1rem; }
-	.mobile-menu { position: relative; display: block; margin-left: auto; }
+	.navigation { position: relative; min-height: 4.5rem; gap: 1rem; }
+	.mobile-menu { display: block; margin-left: auto; }
 	.mobile-menu summary { min-height: 2.75rem; padding: .65rem .8rem; border: 1px solid var(--color-ink); font-size: .85rem; font-weight: 800; cursor: pointer; }
 	.mobile-menu nav { position: absolute; z-index: 10; top: calc(100% + .5rem); right: 0; width: min(20rem, calc(100vw - 2rem)); padding: 1rem; background: var(--color-white); box-shadow: var(--shadow); }
 	.mobile-menu nav ul { display: block; }
