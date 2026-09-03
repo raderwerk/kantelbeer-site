@@ -33,6 +33,7 @@ export interface Copy {
 	countList: string;
 	countListOne: string;
 	countNearest: string;
+	countNearestOne: string;
 	emptyStatus: string;
 	invalidPostcodeStatus: string;
 	ambiguousStatus: string;
@@ -93,7 +94,8 @@ export const COPY: Record<Locale, Copy> = {
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
 		countListOne: '{count} dealer',
-		countNearest: 'Vijf dichtstbijzijnde dealers bij {postcode}',
+		countNearest: '{count} dichtstbijzijnde dealers bij {postcode}',
+		countNearestOne: 'Dichtstbijzijnde dealer bij {postcode}',
 		emptyStatus: 'Geen dealers gevonden',
 		invalidPostcodeStatus: 'Postcode niet herkend',
 		ambiguousStatus: 'Kies het land van de postcode',
@@ -153,7 +155,8 @@ export const COPY: Record<Locale, Copy> = {
 		resultsHeading: 'Dealers',
 		countList: '{count} dealers',
 		countListOne: '{count} dealer',
-		countNearest: 'Five nearest dealers to {postcode}',
+		countNearest: '{count} nearest dealers to {postcode}',
+		countNearestOne: 'Nearest dealer to {postcode}',
 		emptyStatus: 'No dealers found',
 		invalidPostcodeStatus: 'Postcode not recognised',
 		ambiguousStatus: 'Choose the postcode country',
@@ -193,7 +196,13 @@ export function resultStatusText(
 	switch (result.status) {
 		case 'ok':
 			if (result.mode === 'nearest') {
-				return fill(copy.countNearest, { postcode: query.postcode ?? '' });
+				if (result.dealers.length === 1) {
+					return fill(copy.countNearestOne, { postcode: query.postcode ?? '' });
+				}
+				return fill(copy.countNearest, {
+					count: result.dealers.length,
+					postcode: query.postcode ?? '',
+				});
 			}
 			if (result.dealers.length === 1) {
 				return fill(copy.countListOne, { count: 1 });

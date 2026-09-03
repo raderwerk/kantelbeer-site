@@ -23,7 +23,7 @@ export function dealerContactLabel(dealer: Dealer, copy: Copy): string {
 		case 'phone':
 			return `${copy.contactPhone}: ${dealer.contact.phone}`;
 		case 'form':
-			return `${copy.contactForm}: ${dealer.contact.email}`;
+			return `${copy.contactEmail} (${copy.contactForm}): ${dealer.contact.email}`;
 		default: {
 			const exhaustive: never = dealer.contact;
 			return exhaustive;
