@@ -10,13 +10,13 @@ const { locale = 'nl' } = Astro.props;
 const english = locale === 'en';
 const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
 const normalized = path.replace(/\/$/, '') || '/';
-const onCatalog = normalized === '/dealerzoeker' || normalized === '/en/dealerzoeker';
+const onCatalog = normalized === '/dealerzoeker' || normalized === '/en/dealers';
 const otherHref = english
 	? onCatalog
 		? '/dealerzoeker'
 		: '/'
 	: onCatalog
-		? '/en/dealerzoeker'
+		? '/en/dealers'
 		: '/en/';
 const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 const otherUrl = url(otherHref);
@@ -59,6 +59,6 @@ const otherUrl = url(otherHref);
 				</ul>
 			</nav>
 		</details>
-		<a class="dealer-link" href={url(english ? '/en/dealerzoeker' : '/dealerzoeker')}>{english ? 'Find a dealer' : 'Vind een dealer'} <span aria-hidden="true">↗</span></a>
+		<a class="dealer-link" href={url(english ? '/en/dealers' : '/dealerzoeker')}>{english ? 'Find a dealer' : 'Vind een dealer'} <span aria-hidden="true">↗</span></a>
 	</div>
 </header>

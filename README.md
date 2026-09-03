@@ -41,7 +41,7 @@ De merksite omvat home, drie productcategorieën, over ons, dealer worden, conta
 
 ## Dealercatalogus
 
-De dealercatalogus staat op `/dealerzoeker/` (NL) en `/en/dealerzoeker/` (EN). Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
+De dealercatalogus staat op `/dealerzoeker/` (NL) en `/en/dealers/` (EN). Filters werken in de browser zonder paginaherlading en zijn deelbaar via de URL:
 
 | Parameter | Betekenis |
 |---|---|
