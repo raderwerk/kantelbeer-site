@@ -7,6 +7,6 @@ const { product } = Astro.props;
 const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 ---
 <BaseLayout title={product.name} description={product.summary}>
-	<section class="page-hero product-hero"><div class="wrap split"><div><p class="eyebrow">{product.name}</p><h1>{product.summary}</h1></div><div><p>Alle technische gegevens staan in onderstaande tabel en komen uit dezelfde productbron als de datasheet.</p><div class="hero-actions"><a class="button" href={url(`/datasheets/${product.slug}`)}>Open datasheet</a><a class="button secondary" href={url(`/vergelijken?producten=${product.slug}`)}>Vergelijk dit systeem</a></div></div></div></section>
+	<section class="page-hero product-hero"><div class="wrap split"><div><p class="eyebrow">Systeem</p><h1>{product.name}</h1><p>{product.summary}</p></div><div><p>Alle technische gegevens staan in onderstaande tabel en komen uit dezelfde productbron als de datasheet.</p><div class="hero-actions"><a class="button" href={url(`/datasheets/${product.slug}`)}>Open datasheet</a><a class="button secondary" href={url(`/vergelijken?producten=${product.slug}`)}>Vergelijk dit systeem</a></div></div></div></section>
 	<section class="section wrap"><SpecificationTable products={[product]} caption={`Specificaties ${product.name}`} /></section>
 </BaseLayout>

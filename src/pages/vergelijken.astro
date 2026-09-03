@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SpecificationTable from '../components/SpecificationTable.astro';
 import { products } from '../data/products';
+const productSlugs = products.map(product => product.slug);
 ---
 <BaseLayout title="Systemen vergelijken" description="Vergelijk maximaal drie Kantelbeer-systemen naast elkaar.">
 	<section class="page-hero"><div class="wrap"><p class="eyebrow">Vergelijker</p><h1>Leg specificaties naast elkaar.</h1><p>Kies maximaal drie systemen. De selectie staat in de URL, zodat je de vergelijking kunt delen.</p></div></section>
@@ -10,18 +11,18 @@ import { products } from '../data/products';
 		<p class="compare-status" role="status" aria-live="polite">Kies één tot drie systemen.</p>
 		<div class="compare-table"><SpecificationTable products={products} caption="Vergelijking productspecificaties" /></div>
 	</section>
-	<script is:inline define:vars={{ products }}>
+	<script is:inline define:vars={{ productSlugs }}>
 		const root = document.querySelector('[data-compare]');
 		const checks = [...root.querySelectorAll('input[type="checkbox"]')];
 		const table = root.querySelector('table');
 		const status = root.querySelector('[role="status"]');
-		const validSlugs = new Set(products.map(product => product.slug));
+		const validSlugs = new Set(productSlugs);
 		const initial = [...new Set((new URLSearchParams(location.search).get('producten') || '').split(',').filter(slug => validSlugs.has(slug)))].slice(0, 3);
 		checks.forEach(check => { check.checked = initial.includes(check.value); });
 		function render(updateUrl = true) {
 			const selected = checks.filter(check => check.checked).map(check => check.value).slice(0, 3);
 			checks.forEach(check => { check.disabled = selected.length >= 3 && !check.checked; });
-			const visible = products.map((product, index) => ({ product, index: index + 1 })).filter(({ product }) => selected.includes(product.slug));
+			const visible = productSlugs.map((slug, index) => ({ slug, index: index + 1 })).filter(({ slug }) => selected.includes(slug));
 			table.querySelectorAll('tr').forEach(row => {
 				[...row.children].slice(1).forEach((cell, index) => { cell.hidden = !visible.some(item => item.index === index + 1); });
 			});
@@ -29,6 +30,6 @@ import { products } from '../data/products';
 			if (updateUrl) { const url = new URL(location.href); selected.length ? url.searchParams.set('producten', selected.join(',')) : url.searchParams.delete('producten'); history.replaceState({}, '', url); }
 		}
 		checks.forEach(check => check.addEventListener('change', () => render()));
-		render(false);
+		render();
 	</script>
 </BaseLayout>

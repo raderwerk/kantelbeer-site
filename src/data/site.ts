@@ -1,14 +1,14 @@
+import { products, type ProductCategory } from './products';
+
 export const categoryRoute = (slug: string) => `/producten/${slug}`;
 
-export const categories = [
+const categoryContent = [
 	{
 		slug: 'hefbruggen',
 		name: 'Hefbruggen',
 		label: '01 — Omhoog',
 		title: 'Vrij werken op elke hoogte.',
 		description: 'Robuuste hydraulische hefbruggen voor montage, onderhoud en inspectie. Ontworpen voor dagelijks intensief gebruik.',
-		specs: ['2.500–8.000 kg', 'Tot 2.100 mm', 'Elektrohydraulisch'],
-		models: ['KB H25', 'KB H40', 'KB H80'],
 	},
 	{
 		slug: 'kantelaars',
@@ -16,8 +16,6 @@ export const categories = [
 		label: '02 — Draaien',
 		title: 'Elke zijde binnen handbereik.',
 		description: 'Veilig en gecontroleerd kantelen van carrosserieën en industriële componenten, met maximale toegang rondom.',
-		specs: ['1.500–5.000 kg', 'Tot 360°', 'Synchrone aandrijving'],
-		models: ['KB K15', 'KB K30', 'KB K50'],
 	},
 	{
 		slug: 'werkplaatsliften',
@@ -25,10 +23,26 @@ export const categories = [
 		label: '03 — Verplaatsen',
 		title: 'Ruimte die met je meewerkt.',
 		description: 'Mobiele liftoplossingen voor flexibel materiaaltransport en ergonomisch werken zonder vaste installatie.',
-		specs: ['500–2.000 kg', 'Compact chassis', 'Accuvoeding'],
-		models: ['KB W05', 'KB W12', 'KB W20'],
 	},
 ] as const;
+
+const numericValue = (value: string) => Number(value.replace(/\D/g, ''));
+
+/** Category summaries are derived from the validated product catalogue. */
+export const categories = categoryContent.map(category => {
+	const models = products.filter(product => product.category === category.slug as ProductCategory);
+	const capacities = models.map(product => product.specifications.capacity);
+	const liftHeights = models.map(product => product.specifications.liftHeight);
+	return {
+		...category,
+		models,
+		specs: [
+			`${capacities.at(0)}–${capacities.at(-1)}`,
+			`Tot ${liftHeights.reduce((highest, value) => numericValue(value) > numericValue(highest) ? value : highest)}`,
+			[...new Set(models.map(product => product.specifications.installation))].join(' / '),
+		],
+	};
+});
 
 export const nav = [
 	{ href: '/producten', label: 'Systemen', children: categories.map(({ slug, name }) => ({ href: categoryRoute(slug), label: name })) },

@@ -1,12 +1,15 @@
 import { readFile } from 'node:fs/promises';
+import { getProduct } from '../src/data/products.ts';
 
 const samples = ['kb-h25', 'kb-k30', 'kb-w20'];
 const base = new URL('../dist/', import.meta.url);
 const normalizeTable = html => html.match(/<table class="specification-table">[\s\S]*?<\/table>/)?.[0].replace(/\s+/g, ' ').trim();
 
 for (const slug of samples) {
+	const product = getProduct(slug);
+	if (!product) throw new Error(`Datasheetcontrole: onbekend product ${slug}.`);
 	const files = await Promise.all([
-		readFile(new URL(`producten/${slug.startsWith('kb-h') ? 'hefbruggen' : slug.startsWith('kb-k') ? 'kantelaars' : 'werkplaatsliften'}/${slug}/index.html`, base), 'utf8'),
+		readFile(new URL(`producten/${product.category}/${slug}/index.html`, base), 'utf8'),
 		readFile(new URL(`datasheets/${slug}/index.html`, base), 'utf8'),
 	]);
 	const [page, sheet] = files.map(normalizeTable);
