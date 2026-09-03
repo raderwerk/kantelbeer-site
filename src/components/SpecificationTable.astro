@@ -1,0 +1,12 @@
+---
+import { specificationFields, type Product } from '../data/products';
+interface Props { products: readonly Product[]; caption?: string; }
+const { products, caption = 'Productspecificaties' } = Astro.props;
+---
+<div class="table-scroll" tabindex="0" role="region" aria-label={`${caption}; horizontaal scrollbaar`}>
+	<table class="specification-table">
+		<caption>{caption}</caption>
+		<thead><tr><th scope="col">Specificatie</th>{products.map(product => <th scope="col">{product.name}</th>)}</tr></thead>
+		<tbody>{specificationFields.map(field => <tr><th scope="row">{field.label}</th>{products.map(product => <td>{product.specifications[field.key]}</td>)}</tr>)}</tbody>
+	</table>
+</div>

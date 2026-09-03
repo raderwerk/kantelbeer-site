@@ -33,6 +33,7 @@ De site draait dan op `http://localhost:4321`.
 | `npm run typecheck` | `astro check`, het type- en templatecontrole-commando dat ook in CI draait |
 | `npm test` | Unit tests (Vitest): dealerdata, filters, postcodezoekopdracht, lege staat, route-afleiding en linkcontrole |
 | `npm run check:links` | Controleert alle interne routes en in-page-ankers in de productiebuild en faalt bij een dode link |
+| `npm run verify:datasheets` | Vergelijkt de gerenderde specificatietabel van drie productpagina's regel voor regel met hun datasheet |
 | `npm run ci` | Draait typecheck, tests, productiebuild en linkcontrole achter elkaar |
 
 ## Pagina's en navigatie
@@ -51,6 +52,10 @@ De dealercatalogus staat op `/dealerzoeker/` (NL) en `/en/dealers/` (EN). Filter
 | `land` | `nl`, `be` of `de`. Verplicht voor een kale viercijferige postcode (NL/BE-botsing); Nederlandse postcodes met letters (`1234 AB`) en Duitse vijfcijferige codes worden herkend zonder dit veld |
 
 De veertig fictieve dealers staan in één databestand: `src/data/dealers.json`. Postcodezoeken gebruikt lokale prefix-coördinaten (geen kaartdienst, geen `geolocation`). Een leeg filterresultaat toont een boodschap met alternatieve links, geen lege lijst.
+
+## Productcatalogus en datasheets
+
+Alle twaalf producten en hun uniforme specificatievelden staan in `src/data/products.ts`. De catalogus, productpagina's, vergelijker en datasheets lezen rechtstreeks uit deze ene gevalideerde bron. Een ontbrekend verplicht veld laat de build met een concrete foutmelding stoppen. Via **Opslaan als pdf** op een datasheet kan de browser een PDF genereren; draai na de build `npm run verify:datasheets` om drie representatieve datasheets met hun productpagina te vergelijken. Een vergelijking van maximaal drie producten is deelbaar via de queryparameter `producten`.
 
 ## Bijdragen
 

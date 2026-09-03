@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SpecificationTable from '../../components/SpecificationTable.astro';
+import { products } from '../../data/products';
+export function getStaticPaths() { return products.map(product => ({ params: { slug: product.slug }, props: { product } })); }
+const { product } = Astro.props;
+const url = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+<BaseLayout title={`Datasheet ${product.name}`} description={`Technische datasheet voor ${product.name}.`}>
+	<article class="datasheet wrap"><header><a class="back-link print-button" href={url(`/producten/${product.category}/${product.slug}`)}>← Terug naar {product.name}</a><p class="eyebrow">Technische datasheet</p><h1>{product.name}</h1><p>{product.summary}</p><button class="button print-button" type="button" onclick="window.print()">Opslaan als pdf</button></header><SpecificationTable products={[product]} caption={`Specificaties ${product.name}`} /><p class="datasheet-note">Productgegevens uit de centrale catalogusbron.</p></article>
+</BaseLayout>
