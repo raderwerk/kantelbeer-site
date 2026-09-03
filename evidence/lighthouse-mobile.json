@@ -1,0 +1,35 @@
+{
+  "measuredAt": "2026-09-03T10:03:00Z",
+  "lighthouseVersion": "12.8.2",
+  "browser": "Chromium 140.0.7339.16",
+  "origin": "local Astro production preview",
+  "baseUrl": "http://127.0.0.1:4321/kantelbeer-site/",
+  "profile": {
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "screenEmulation": {
+      "mobile": true,
+      "width": 360,
+      "height": 800,
+      "deviceScaleFactor": 2
+    },
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.56,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    }
+  },
+  "results": [
+    { "route": "/", "lcpMs": 904.3, "performanceScore": 1 },
+    { "route": "/producten/hefbruggen/", "lcpMs": 903.9, "performanceScore": 1 },
+    { "route": "/producten/kantelaars/", "lcpMs": 752.2, "performanceScore": 1 },
+    { "route": "/producten/werkplaatsliften/", "lcpMs": 902.3, "performanceScore": 1 },
+    { "route": "/over-ons/", "lcpMs": 901.9, "performanceScore": 1 },
+    { "route": "/dealer-worden/", "lcpMs": 902.9, "performanceScore": 1 },
+    { "route": "/contact/", "lcpMs": 902.6, "performanceScore": 1 },
+    { "route": "/dealerzoeker/", "lcpMs": 902.9, "performanceScore": 1 }
+  ]
+}

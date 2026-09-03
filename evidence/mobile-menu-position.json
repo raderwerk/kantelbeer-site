@@ -1,0 +1,27 @@
+[
+  {
+    "width": 320,
+    "panelLeft": 16,
+    "minimumLinkLeft": 32
+  },
+  {
+    "width": 360,
+    "panelLeft": 24,
+    "minimumLinkLeft": 40
+  },
+  {
+    "width": 390,
+    "panelLeft": 54,
+    "minimumLinkLeft": 70
+  },
+  {
+    "width": 430,
+    "panelLeft": 94,
+    "minimumLinkLeft": 110
+  },
+  {
+    "width": 540,
+    "panelLeft": 204,
+    "minimumLinkLeft": 220
+  }
+]
